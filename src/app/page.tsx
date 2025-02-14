@@ -92,11 +92,41 @@
 //     </main>
 //   )
 // }
-
+'use client'
 import Link from 'next/link'
 import '@/styles/app.module.css';
 import AppTable from '@/components/app.table';
+import { useEffect } from 'react';
+import useSWR from "swr";
 export default function Home() {
+  // const res = fetch("http://localhost:8000/blogs");
+  // console.log(">>", res)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch("http://localhost:8000/blogs");
+  //     const data = await res.json()
+  //     console.log(">>> check", data)
+  //   }
+  //   fetchData();
+  // }, [])
+  const fetcher = (url: string) => fetch(url)
+    .then((res) => res.json());
+
+  const { data, error, isLoading } = useSWR(
+    "http://localhost:8000/blogs",
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false
+    }
+  );
+
+  console.log(">>>check data", data)
+  if (!data) {
+    return <div>loading...</div>
+  }
+
   return (
     <div>
       <ul>
@@ -110,7 +140,9 @@ export default function Home() {
           <Link href="/tiktok">Tiktok</Link>
         </li>
       </ul>
-      <AppTable />
+      <AppTable
+        blogs={data?.sort((a: any, b: any) => b.id - a.id)}
+      />
     </div>
   )
 }

@@ -3,6 +3,8 @@
 import { Inter } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Container from 'react-bootstrap/Container';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify';
 // import '@/components/app.footer.tsx';
 // import '@/components/app.header.tsx';
 // import '@/components/app.table.tsx';
@@ -28,6 +30,18 @@ export default function RootLayout({
           {children}
         </Container>
         <AppFooter></AppFooter>
+        <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
 
 
