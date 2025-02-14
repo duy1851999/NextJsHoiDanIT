@@ -95,7 +95,6 @@
 'use client'
 import Link from 'next/link'
 import '@/styles/app.module.css';
-import AppTable from '@/components/app.table';
 import { useEffect } from 'react';
 import useSWR from "swr";
 export default function Home() {
@@ -109,23 +108,23 @@ export default function Home() {
   //   }
   //   fetchData();
   // }, [])
-  const fetcher = (url: string) => fetch(url)
-    .then((res) => res.json());
+  // const fetcher = (url: string) => fetch(url)
+  //   .then((res) => res.json());
 
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/blogs",
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false
-    }
-  );
+  // const { data, error, isLoading } = useSWR(
+  //   "http://localhost:8000/blogs",
+  //   fetcher,
+  //   {
+  //     revalidateIfStale: false,
+  //     revalidateOnFocus: false,
+  //     revalidateOnReconnect: false
+  //   }
+  // );
 
-  console.log(">>>check data", data)
-  if (!data) {
-    return <div>loading...</div>
-  }
+  // console.log(">>>check data", data)
+  // if (!isLoading) {
+  //   return <div>loading...</div>
+  // }
 
   return (
     <div>
@@ -140,9 +139,6 @@ export default function Home() {
           <Link href="/tiktok">Tiktok</Link>
         </li>
       </ul>
-      <AppTable
-        blogs={data?.sort((a: any, b: any) => b.id - a.id)}
-      />
     </div>
   )
 }

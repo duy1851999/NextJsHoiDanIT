@@ -5,7 +5,10 @@ const AppFooter = () => {
         <div style={{
             background: "#ddd",
             textAlign: "center",
-            padding: "5px 0"
+            padding: "5px 5px",
+            position: "fixed",
+            bottom: 0,
+            width: "100%"
         }}>
             Khoa hoc Next.JS v13 Basic
         </div>
